@@ -1,0 +1,9 @@
+[submodule "arduino/arduino-makefile"]
+	path = arduino/arduino-makefile
+	url = git://github.com/bertrandmartel/arduino-makefile.git
+[submodule "raspberry/linux-wiringpi/raspberry-dev"]
+	path = raspberry/linux-wiringpi/raspberry-dev
+	url = git://github.com/bertrandmartel/raspberry-dev.git
+[submodule "raspberry/liblouis"]
+	path = raspberry/liblouis
+	url = git://github.com/liblouis/liblouis.git

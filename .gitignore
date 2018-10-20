@@ -1,0 +1,33 @@
+# For PCBs designed using KiCad: http://www.kicad-pcb.org/
+# Format documentation: http://kicad-pcb.org/help/file-formats/
+
+# Temporary files
+*.000
+*.bak
+*.bck
+*.kicad_pcb-bak
+*~
+_autosave-*
+*.tmp
+*-rescue.lib
+*-save.pro
+*-save.kicad_pcb
+
+# Netlist files (exported from Eeschema)
+*.net
+
+# Autorouter files (exported from Pcbnew)
+*.dsn
+*.ses
+
+# Exported BOM files
+*.xml
+*.csv
+raspberry/linux-wiringpi/out*
+raspberry/linux-wiringpi/CMakeFiles
+raspberry/linux-wiringpi/cmake_install.cmake
+CMakeCache.txt
+raspberry/linux-wiringpi/metadata/braille_driver.pc.in
+*.o
+*.d
+*.png

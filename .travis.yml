@@ -1,0 +1,6 @@
+language: cpp
+script: 
+  - git submodule update --init --recursive
+  - cd arduino && make && cd ..
+  - cd raspberry/linux-wiringpi && ./run.sh
+sudo: false
