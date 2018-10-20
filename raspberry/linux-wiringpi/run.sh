@@ -14,6 +14,12 @@ if [ ! -f configure ]; then
 	./autogen.sh
 fi
 if [ ! -f Makefile ]; then
+	export CC="arm-linux-gnueabihf-gcc"
+	export AR="arm-linux-gnueabihf-ar"
+	export AS="arm-linux-gnueabihf-as"
+	export LD="arm-linux-gnueabihf-ld"
+	export NM="arm-linux-gnueabihf-nm"
+	export RANLIB="arm-linux-gnueabihf-ranlib"
 	./configure --host arm-linux-gnueabihf
 fi
 make

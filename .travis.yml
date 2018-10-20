@@ -2,5 +2,6 @@ language: cpp
 script: 
   - git submodule update --init --recursive
   - cd arduino && make && cd ..
+  - ls raspberry/linux-wiringpi/raspberry-dev/tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/bin/*
   - cd raspberry/linux-wiringpi && ./run.sh
 sudo: false
