@@ -17,8 +17,6 @@ include_directories (include ${WPI_PATH})
 install(TARGETS metecdriver
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-configure_file(metadata/braille_driver.pc.in metadata/braille_driver.pc @ONLY)
-install(FILES ${CMAKE_BINARY_DIR}/braille_driver.pc DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)
 
 #link wiringpi
 find_library(WPI_LIB wiringPi HINTS ${WPI_PATH} NO_CMAKE_FIND_ROOT_PATH)
