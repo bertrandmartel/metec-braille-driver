@@ -41,6 +41,14 @@ This repo also includes an example using this driver and [liblouis](https://gith
 	<img src="https://user-images.githubusercontent.com/5183022/47248422-a5218900-d40a-11e8-83f3-a8cceafdcf55.png"/>
 </p>
 
+## Setup
+
+```bash
+git clone git@github.com:bertrandmartel/metec-braille-driver.git
+cd metec-braille-driver
+git submodule update --init --recursive
+```
+
 ## Project structure
 
     .
