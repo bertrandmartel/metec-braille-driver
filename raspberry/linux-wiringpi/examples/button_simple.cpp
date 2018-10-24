@@ -13,18 +13,16 @@ using namespace MetecDriverLibrary;
 
 MetecDriver metecDriver(CELL_COUNT, ON, DIN, STROBE, CLK, DOUT);
 
-button key;
-
 void setup() {
     wiringPiSetup();
     metecDriver.init();
 }
 
 void loop() {
-    metecDriver.checkButton(&key);
-    if (key.update) {
-        printf("button %d switched to %d\n", key.position, key.state);
-        key.update = false;
+    metecDriver.checkButton();
+    if (metecDriver.btn_update) {
+        printf("button %d switched to %d\n", metecDriver.btn_position, metecDriver.btn_state);
+        metecDriver.btn_update = false;
     }
     delay(50);
 }

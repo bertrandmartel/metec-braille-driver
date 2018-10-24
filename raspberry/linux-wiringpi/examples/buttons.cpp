@@ -27,8 +27,6 @@ uint16_t pattern2[PATTERN_LENGTH2] = {
 
 MetecDriver metecDriver(CELL_COUNT, ON, DIN, STROBE, CLK, DOUT);
 
-button key;
-
 uint8_t count = 0;
 
 void setup() {
@@ -37,11 +35,11 @@ void setup() {
 }
 
 void loop() {
-    metecDriver.checkButton(&key);
-    if (key.update) {
-        printf("button %d switched to %d\n", key.position, key.state);
-        key.update = false;
-        if (key.state == Pushed) {
+    metecDriver.checkButton();
+    if (metecDriver.btn_update) {
+        printf("button %d switched to %d\n", metecDriver.btn_position, metecDriver.btn_state);
+        metecDriver.btn_update = false;
+        if (metecDriver.btn_state == ButtonState::Pushed) {
             if (count % 2 == 0) {
                 metecDriver.writeCells(pattern1, PATTERN_LENGTH1, false);
             } else {

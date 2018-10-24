@@ -31,19 +31,17 @@ void setup() {
     Serial.begin(9600);
 }
 
-button key;
-
 uint8_t count = 0;
 
 void loop() {
-    metecDriver.checkButton(&key);
-    if (key.update) {
+    metecDriver.checkButton();
+    if (metecDriver.btn_update) {
         Serial.print("button ");
-        Serial.print(key.position);
+        Serial.print(metecDriver.btn_position);
         Serial.print(" switched to ");
-        Serial.println(key.state);
-        key.update = false;
-        if (key.state == Pushed) {
+        Serial.println((int)metecDriver.btn_state, DEC);
+        metecDriver.btn_update = false;
+        if (metecDriver.btn_state == ButtonState::Pushed) {
             if (count % 2 == 0) {
                 metecDriver.writeCells(pattern1, PATTERN_LENGTH1, false);
             } else {
