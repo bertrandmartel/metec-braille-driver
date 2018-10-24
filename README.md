@@ -70,8 +70,12 @@ git submodule update --init --recursive
     │   │   └── clean.sh                 # clean raspberry pi folder (remove cache, output dir etc...)
     │   ├── windows-iot                  # Windows IoT core folder
     │   │   └── MetecDriver 
-    │   │       ├── MetecDriverLibrary   # library project
-    │   │       └── SingleCellExample    # Sample Background task using the library
+    │   │       ├── MetecDriverLibrary   # library project compiling C++/CX into Windows Runtime Component
+    │   │       ├── ExampleButtonSimple  # buttons input example in C#
+    │   │       ├── ExampleButtons       # buttons input + write pattern example in C#
+    │   │       ├── ExamplePatternChange # change pattern every x sec example in C++
+    │   │       ├── MultiCellsExample    # write multiple pattern example in C++
+    │   │       └── SingleCellExample    # write single pattern example in C++
     │   └── liblouis                     # liblouis submodule build folder
     ├── 8pin-adapter                     # KiCad files for 2.00mm to 2.52mm 8 pin adapter
     └─── fritzing                        # Fritzing sketch for wiring pictures
@@ -79,7 +83,8 @@ git submodule update --init --recursive
 ## Library Usage
 
 * **[Go to Arduino README](./arduino)**
-* **[Go to Raspberry PI README](./raspberry)**
+* **[Go to Raspberry PI Linux + wiringPi README](./raspberry/linux-wiringpi)**
+* **[Go to Raspberry PI Windows IoT Core README](./raspberry/windows-iot)**
 
 ## 8 Pin Adapter 
 

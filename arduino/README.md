@@ -98,20 +98,18 @@ using namespace MetecDriverLibrary;
 
 MetecDriver metecDriver(CELL_COUNT, ON, DIN, STROBE, CLK, DOUT);
 
-button key;
-
 int main() {
     init();
     metecDriver.init();
     Serial.begin(9600);
     while (1) {
-        metecDriver.checkButton(&key);
-        if (key.update) {
+        metecDriver.checkButton();
+        if (metecDriver.btn_update) {
             Serial.print("button ");
-            Serial.print(key.position);
+            Serial.print(metecDriver.btn_position);
             Serial.print(" switched to ");
-            Serial.println(key.state);
-            key.update = false;
+            Serial.println((int)metecDriver.btn_state, DEC);
+            metecDriver.btn_update = false;
         }
         delay(50);
     }
