@@ -1,36 +1,7 @@
-/************************************************************************************
- * The MIT License (MIT)                                                            *
- *                                                                                  *
- * Copyright (c) 2018 Bertrand Martel                                               *
- *                                                                                  * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy     * 
- * of this software and associated documentation files (the "Software"), to deal    * 
- * in the Software without restriction, including without limitation the rights     * 
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell        * 
- * copies of the Software, and to permit persons to whom the Software is            * 
- * furnished to do so, subject to the following conditions:                         * 
- *                                                                                  * 
- * The above copyright notice and this permission notice shall be included in       * 
- * all copies or substantial portions of the Software.                              * 
- *                                                                                  * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR       * 
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,         * 
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE      * 
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER           * 
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,    * 
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN        * 
- * THE SOFTWARE.                                                                    * 
- ************************************************************************************/
-/**
-    braille.cpp
-    
-    Metec driver for Metec Braille-line 20 Cell standard
-    @author Bertrand Martel
-    @version 1.0
-*/
 #include "pch.h"
 #ifdef _WIN32
 using namespace Windows::Devices::Gpio;
+using namespace Windows::Foundation;
 #endif //_WIN32
 
 #ifdef ARDUINO
@@ -97,13 +68,17 @@ void MetecDriver::full() {
 
 void MetecDriver::setCell(uint8_t position, uint8_t value) {
     _cells[position] = value;
-    if (wait != 0) {
+    if (_wait != 0) {
         writeAllCell();
-        delay(wait);
+        delay(_wait);
     }
 }
 
+#ifdef _WIN32
+void MetecDriver::writeCells(const Array<double>^ pattern, uint8_t max_charac, bool reverse) {
+#else
 void MetecDriver::writeCells(uint16_t *pattern, uint8_t max_charac, bool reverse) {
+#endif //_WIN32
     uint8_t max = _cellSize;
 
     if (max_charac < max) {
@@ -160,16 +135,20 @@ MetecDriver::MetecDriver(uint8_t cellCount,
 void MetecDriver::init() {
 #ifdef _WIN32
     GpioController ^controller = GpioController::GetDefault();
-    _on_pin = controller->OpenPin(_on_pin_val);
-    _on_pin->SetDriveMode(GpioPinDriveMode::Output);
     _din_pin = controller->OpenPin(_din_pin_val);
+    _din_pin->Write(GpioPinValue::Low);
     _din_pin->SetDriveMode(GpioPinDriveMode::Output);
     _strobe_pin = controller->OpenPin(_strobe_pin_val);
+    _strobe_pin->Write(GpioPinValue::Low);
     _strobe_pin->SetDriveMode(GpioPinDriveMode::Output);
     _clk_pin = controller->OpenPin(_clk_pin_val);
+    _clk_pin->Write(GpioPinValue::Low);
     _clk_pin->SetDriveMode(GpioPinDriveMode::Output);
     _dout_pin = controller->OpenPin(_dout_pin_val);
     _dout_pin->SetDriveMode(GpioPinDriveMode::Input);
+    _on_pin = controller->OpenPin(_on_pin_val);
+    _on_pin->Write(GpioPinValue::Low); //enable module
+    _on_pin->SetDriveMode(GpioPinDriveMode::Output);
 #else
     _on_pin = _on_pin_val;
     _din_pin = _din_pin_val;
@@ -195,10 +174,10 @@ void MetecDriver::enableModule() {
 }
 
 void MetecDriver::disableModule() {
-    digitalWrite(_on_pin, 0);
+    digitalWrite(_on_pin, 1);
 }
 
-void MetecDriver::checkButton(button *key) {
+void MetecDriver::checkButton() {
     digitalWrite(_strobe_pin, 0);
     digitalWrite(_strobe_pin, 1);
     digitalWrite(_clk_pin, 1);
@@ -223,9 +202,23 @@ void MetecDriver::checkButton(button *key) {
     digitalWrite(_strobe_pin, 0);
 
     if (changed == 1) {
-        key->position = position;
-        key->state = (_keys[position] == 16) ? Pushed : Released;
-        key->update = true;
+#ifdef _WIN32
+        _btn_position = position;
+        _btn_state = (_keys[position] == 16) ? ButtonState::Pushed : ButtonState::Released;
+        _btn_update = true;
+#else
+        btn_position = position;
+        btn_state = (_keys[position] == 16) ? ButtonState::Pushed : ButtonState::Released;
+        btn_update = true;
+#endif
     }
+}
+
+void MetecDriver::setWait(uint8_t wait) {
+    _wait = wait;
+}
+
+uint8_t MetecDriver::getWait() {
+    return _wait;
 }
 }

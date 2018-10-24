@@ -45,55 +45,78 @@
 #define MAX_BRAILLE 0x28FF
 
 #ifdef _WIN32
-#ifdef MAKEDLL
-#define EXPORT  __declspec(dllexport)
-#else //MAKEDLL
-#define EXPORT  __declspec(dllimport)
-#endif   //MAKEDLL
-#else //_WIN32
-#define EXPORT
+using namespace Platform;
+#define PUBLIC public
+#define PUBLIC_REF ref
+#define SEALED sealed
+#else
+#define PUBLIC
+#define PUBLIC_REF
+#define SEALED
 #endif //_WIN32
 
 namespace MetecDriverLibrary
 {
-enum ButtonState {Released = 0, Pushed = 1};
+PUBLIC enum class ButtonState {Released = 0, Pushed = 1};
 
-typedef struct {
-    uint8_t position;
-    ButtonState state;
-    bool update;
-} button;
-
-class MetecDriver {
+PUBLIC_REF class MetecDriver SEALED {
 
 public:
-    EXPORT MetecDriver(uint8_t cellCount,
+    MetecDriver(uint8_t cellCount,
                        uint8_t on_pin,
                        uint8_t din_pin,
                        uint8_t strobe_pin,
                        uint8_t clk_pin,
                        uint8_t dout_pin);
-    EXPORT ~MetecDriver();
 
-    EXPORT void init();
+    void init();
 
-    EXPORT void clear();
+    void clear();
 
-    EXPORT void full();
+    void full();
 
-    EXPORT void writeCells(uint16_t *pattern, uint8_t max_charac, bool reverse);
+#ifdef _WIN32
+    void writeCells(const Array<double>^ pattern, uint8_t max_charac, bool reverse);
+#else
+    void writeCells(uint16_t* pattern, uint8_t max_charac, bool reverse);
+#endif //_WIN32
 
-    EXPORT void writeSingleCell(uint8_t position, uint16_t pattern);
+    void writeSingleCell(uint8_t position, uint16_t pattern);
 
-    EXPORT void enableModule();
+    void enableModule();
 
-    EXPORT void disableModule();
+    void disableModule(); 
 
-    EXPORT void checkButton(button *key);
+    void setWait(uint8_t wait);
+    uint8_t getWait();
+    
+    void checkButton();
 
-    uint8_t wait = DEFAULT_TIME_BETWEEN_CELL;
+#ifdef _WIN32
+    property uint8_t btn_position
+    {
+        uint8_t get() { return _btn_position; }
+    }
+    property ButtonState btn_state
+    {
+        ButtonState get() { return _btn_state; }
+    }
+    property bool btn_update
+    {
+        bool get() { return _btn_update; }
+        void set(bool value) { _btn_update = value; }
+    }
+#else
+    uint8_t btn_position;
+    ButtonState btn_state;
+    bool btn_update;
+    ~MetecDriver();
+#endif //_WIN32
 
 private:
+#ifdef _WIN32
+    ~MetecDriver();
+#endif
     void setCell(uint8_t position, uint8_t value);
     void setCellNoDelay(uint8_t position, uint8_t value);
     void writeAllCell();
@@ -103,6 +126,7 @@ private:
     uint8_t _strobe_pin_val = 0;
     uint8_t _clk_pin_val = 0;
     uint8_t _dout_pin_val = 0;
+    uint8_t _wait = DEFAULT_TIME_BETWEEN_CELL;
 
 #ifdef _WIN32
     Windows::Devices::Gpio::GpioPin ^_on_pin;
@@ -121,6 +145,12 @@ private:
     uint8_t _cellSize = 0;
     uint8_t* _cells = 0;
     uint8_t* _keys = 0;
+
+#ifdef _WIN32
+    uint8_t _btn_position = 0;
+    ButtonState _btn_state = ButtonState::Released;
+    bool _btn_update;
+#endif
 };
 
 const uint16_t braille_db[256] = {
