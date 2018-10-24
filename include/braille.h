@@ -47,6 +47,9 @@
 #ifdef _WIN32
 using namespace Platform;
 #include <collection.h>
+#define PUBLIC public
+#else
+#define PUBLIC
 #endif //_WIN32
 
 namespace MetecDriverLibrary
@@ -74,7 +77,7 @@ public:
     void full();
 
 #ifdef _WIN32
-    void writeCells(const Array<double>^ pattern, uint8_t max_charac, bool reverse);
+    void writeCells(const Array<uint16_t>^ pattern, uint8_t max_charac, bool reverse);
 #else
     void writeCells(uint16_t* pattern, uint8_t max_charac, bool reverse);
 #endif //_WIN32

@@ -75,7 +75,7 @@ void MetecDriver::setCell(uint8_t position, uint8_t value) {
 }
 
 #ifdef _WIN32
-void MetecDriver::writeCells(const Array<double>^ pattern, uint8_t max_charac, bool reverse) {
+void MetecDriver::writeCells(const Array<uint16_t>^ pattern, uint8_t max_charac, bool reverse) {
 #else
 void MetecDriver::writeCells(uint16_t *pattern, uint8_t max_charac, bool reverse) {
 #endif //_WIN32
