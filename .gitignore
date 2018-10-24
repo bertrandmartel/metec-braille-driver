@@ -31,3 +31,9 @@ raspberry/linux-wiringpi/metadata/braille_driver.pc.in
 *.o
 *.d
 *.png
+raspberry/windows-iot/MetecDriver/.vs
+raspberry/windows-iot/MetecDriver/ARM
+raspberry/windows-iot/MetecDriver/*/ARM
+raspberry/windows-iot/MetecDriver/*/bin/ARM
+raspberry/windows-iot/MetecDriver/*/obj/ARM
+raspberry/windows-iot/MetecDriver/*/obj

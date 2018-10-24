@@ -1,4 +1,5 @@
-﻿#include "pch.h"
+﻿#include "StartupTask.h"
+#include "braille.h"
 #define CELL_COUNT 20
 #define ON         22
 #define DIN        4

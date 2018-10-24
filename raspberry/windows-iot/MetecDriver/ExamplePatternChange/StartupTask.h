@@ -1,7 +1,5 @@
 #pragma once
 
-#include "pch.h"
-
 namespace ExamplePatternChange
 {
     [Windows::Foundation::Metadata::WebHostHidden]

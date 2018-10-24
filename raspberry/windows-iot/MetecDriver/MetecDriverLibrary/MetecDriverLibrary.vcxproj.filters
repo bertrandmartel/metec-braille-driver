@@ -7,10 +7,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp" />
     <ClCompile Include="..\..\..\..\src\braille.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="pch.h" />
   </ItemGroup>
 </Project>

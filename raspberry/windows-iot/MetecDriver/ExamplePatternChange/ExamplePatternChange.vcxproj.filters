@@ -10,11 +10,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp" />
-    <ClCompile Include="StartupTask.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="pch.h" />
     <ClInclude Include="StartupTask.h" />
   </ItemGroup>
   <ItemGroup>
@@ -45,5 +40,8 @@
     <Image Include="Assets\Wide310x150Logo.scale-200.png">
       <Filter>Assets</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="StartupTask.cpp" />
   </ItemGroup>
 </Project>

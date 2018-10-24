@@ -1,4 +1,5 @@
-﻿#include "pch.h"
+﻿#include "StartupTask.h"
+#include "braille.h"
 #define CELL_COUNT 20
 #define ON         22
 #define DIN        4
@@ -62,7 +63,7 @@ void StartupTask::Run(IBackgroundTaskInstance^ taskInstance)
 	});
 
 	TimeSpan interval;
-	interval.Duration = 2* 10000000; //every 2 seconds
+	interval.Duration = 2 * 10000000; //every 2 seconds
 	Timer = ThreadPoolTimer::CreatePeriodicTimer(ref new TimerElapsedHandler(handler), interval);
 }
 

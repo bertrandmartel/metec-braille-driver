@@ -46,20 +46,18 @@
 
 #ifdef _WIN32
 using namespace Platform;
-#define PUBLIC public
-#define PUBLIC_REF ref
-#define SEALED sealed
-#else
-#define PUBLIC
-#define PUBLIC_REF
-#define SEALED
+#include <collection.h>
 #endif //_WIN32
 
 namespace MetecDriverLibrary
 {
 PUBLIC enum class ButtonState {Released = 0, Pushed = 1};
 
-PUBLIC_REF class MetecDriver SEALED {
+#ifdef _WIN32
+public ref class MetecDriver sealed {
+#else
+class MetecDriver {
+#endif //_WIN32
 
 public:
     MetecDriver(uint8_t cellCount,
