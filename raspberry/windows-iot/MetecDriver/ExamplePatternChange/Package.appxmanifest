@@ -12,7 +12,7 @@
     Publisher="CN=bmartel"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="00212203-f942-494a-b6e5-92d7a40d7d19" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="4afa07c0-4c25-444c-94b9-95d646efa06a" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>ExamplePatternChange</DisplayName>

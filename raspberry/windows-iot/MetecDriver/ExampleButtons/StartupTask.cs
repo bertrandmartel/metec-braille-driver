@@ -24,12 +24,12 @@ namespace ExampleButtons
         BackgroundTaskDeferral deferral;
         MetecDriver metecDriver = new MetecDriver(CELL_COUNT, ON, DIN, STROBE, CLK, DOUT);
 
-        double[] pattern1 = new double[] {
+        ushort[] pattern1 = new ushort[] {
             0x2813, 0x2811, 0x2807, 0x2807, 0x2815, 0x20, 0x283a, 0x2815, 0x2817, 0x2807, 0x2819 };
         //     ⠓       ⠑      ⠇       ⠇       ⠕             ⠺       ⠕      ⠗       ⠇      ⠙
         //     H       E      L       L        O             W       O       R      L       D
 
-        double[] pattern2 = new double[] {
+        ushort[] pattern2 = new ushort[] {
              0x283a,  0x2811,  0x2807,  0x2809,  0x2815,  0x280d,  0x2811, 0x20,  0x2813, 0x2815, 0x280d, 0x2811, 0x20, 0x2816 };
         //    ⠺         ⠑        ⠇        ⠉       ⠕        ⠍        ⠑             ⠓       ⠕       ⠍       ⠑             ⠖
         //    W         E        L        C        O        M        E             H       O        M       E             !
