@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>MetecDriverLibrary</id>
+    <version>1.0.0</version>
+    <title>Metec Braille Cell Library</title>
+    <authors>Bertrand Martel</authors>
+    <owners>Bertrand Martel</owners>
+    <licenseUrl>https://github.com/bertrandmartel/metec-braille-driver/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/bertrandmartel/metec-braille-driver</projectUrl>
+	<iconUrl>https://user-images.githubusercontent.com/5183022/47472975-ef42aa00-d810-11e8-8125-11662b60c4dc.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+	<language>en-US</language>
+    <description>Driver for Metec Braille-line 20 Cell standard module</description>
+    <releaseNotes>New release</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>braille metec</tags>
+  </metadata>
+	<files>	
+		<!-- WinMd and IntelliSense files -->
+		<file src="..\ARM\Debug\MetecDriverLibrary\MetecDriverLibrary.winmd" target="lib\uap10.0"/>
+        <file src="..\ARM\Debug\MetecDriverLibrary\MetecDriverLibrary.xml" target="lib\uap10.0"/>
+		
+		<!-- DLLs and resources -->
+        <file src="..\ARM\Debug\MetecDriverLibrary\MetecDriverLibrary.dll" target="runtimes\win10-arm\native"/>
+        <file src="..\ARM\Debug\MetecDriverLibrary\MetecDriverLibrary.pri" target="runtimes\win10-arm\native"/>
+		
+		<!-- .targets -->
+        <file src="MetecDriverLibrary.targets" target="build\native"/>
+	</files>
+</package>

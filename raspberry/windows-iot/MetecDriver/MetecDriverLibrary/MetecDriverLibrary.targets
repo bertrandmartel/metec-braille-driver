@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <MetecDriverLibrary-Platform Condition="'$(Platform)' != 'Win32'">$(Platform)</MetecDriverLibrary-Platform>
+    </PropertyGroup>
+    <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'UAP'">
+        <Reference Include="$(MSBuildThisFileDirectory)..\..\lib\uap10.0\MetecDriverLibrary.winmd">
+            <Implementation>MetecDriverLibrary.dll</Implementation>
+        </Reference>
+    <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)..\..\runtimes\win10-$(MetecDriverLibrary-Platform)\native\MetecDriverLibrary.dll" />
+    </ItemGroup>
+</Project>
