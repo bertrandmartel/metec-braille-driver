@@ -1,6 +1,6 @@
 # Windows IoT Core
 
-MetecDriver library is build using C++/CX as a Windows Runtime Component. It can be used from other UWP app (C++/C#/.NET).
+MetecDriver library is built using C++/CX as a Windows Runtime Component. It can be used from other UWP app (C++/C#/.NET).
 
 ## C++ : Single cell 
 
