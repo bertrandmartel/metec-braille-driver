@@ -8,3 +8,5 @@ raspberry/linux-wiringpi/metadata/braille_driver.pc.in
 .vs
 ARM
 obj
+Debug
+*.nupkg
