@@ -1,18 +1,6 @@
 # Windows IoT Core
 
-MetecDriver library is build using C++/CX as a Windows Runtime Component. It can be used from other UWP app (C++/C#/.NET) by adding the reference to the library project.
-
-To use the library in another solution: 
-
-* create a new solution
-* add existing project : select [MetecDriverLibrary](./raspberry/windows-iot/MetecDriver/MetecDriverLibrary) project in `raspberry/windows-iot/MetecDriver/MetecDriverLibrary`
-* create your project selecting Windows IoT / Background Task (IoT)
-* edit project dependency to build MetecDriverLibrary first
-* add a reference to MetecDriverLibrary project
-
-or if you just want to build the examples : 
-
-Using Visual Studio C++ open `MetecDriver.sln` under `raspberry/windows-iot/MetecDriver` and build solution to build the library & the examples.
+MetecDriver library is build using C++/CX as a Windows Runtime Component. It can be used from other UWP app (C++/C#/.NET).
 
 ## C++ : Single cell 
 
@@ -64,12 +52,12 @@ using namespace Platform;
 using namespace Windows::ApplicationModel::Background;
 
 #define PATTERN_LENGTH 14
-double pattern_tmp[PATTERN_LENGTH] = {
+uint16_t pattern_tmp[PATTERN_LENGTH] = {
     0x283a,  0x2811,  0x2807,  0x2809,  0x2815,  0x280d,  0x2811, 0x20,  0x2813, 0x2815, 0x280d, 0x2811, 0x20, 0x2816
     //    ⠺         ⠑        ⠇        ⠉       ⠕        ⠍        ⠑             ⠓       ⠕       ⠍       ⠑             ⠖
     //    W         E        L        C        O        M        E             H       O        M       E             !
 };
-Array<double> ^pattern = ref new Array<double>(pattern_tmp, PATTERN_LENGTH);
+Array<uint16_t> ^pattern = ref new Array<uint16_t>(pattern_tmp, PATTERN_LENGTH);
 
 MetecDriver metecDriver(CELL_COUNT, ON, DIN, STROBE, CLK, DOUT);
 
@@ -150,6 +138,46 @@ namespace ExampleButtonSimple
         }
     }
 }
+```
+
+## C# Multi cell
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Net.Http;
+using Windows.ApplicationModel.Background;
+
+using MetecDriverLibrary;
+
+namespace ExampleMultiCell
+{
+    public sealed class StartupTask : IBackgroundTask
+    {
+        const byte CELL_COUNT = 20;
+        const byte ON = 22;
+        const byte DIN = 4;
+        const byte STROBE = 17;
+        const byte CLK = 27;
+        const byte DOUT = 18;
+
+        MetecDriver metecDriver = new MetecDriver(CELL_COUNT, ON, DIN, STROBE, CLK, DOUT);
+
+        ushort[] pattern = new ushort[] {
+             0x283a,  0x2811,  0x2807,  0x2809,  0x2815,  0x280d,  0x2811, 0x20,  0x2813, 0x2815, 0x280d, 0x2811, 0x20, 0x2816 };
+        //    ⠺         ⠑        ⠇        ⠉       ⠕        ⠍        ⠑             ⠓       ⠕       ⠍       ⠑             ⠖
+        //    W         E         L        C       O         M        E              H       O        M       E             !
+
+        public void Run(IBackgroundTaskInstance taskInstance)
+        {
+            metecDriver.init();
+            metecDriver.writeCells(pattern, (byte)pattern.Length, false);
+        }
+    }
+}
+
 ```
 
 # License
