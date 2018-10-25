@@ -1,6 +1,7 @@
 # Metec Braille cell driver
 
 [![Build Status](https://travis-ci.org/bertrandmartel/metec-braille-driver.svg?branch=master)](https://travis-ci.org/bertrandmartel/metec-braille-driver)
+[![Build status](https://ci.appveyor.com/api/projects/status/pdviuiomaut1rsml?svg=true)](https://ci.appveyor.com/project/bertrandmartel/metec-braille-driver)
 [![License](http://img.shields.io/:license-mit-blue.svg)](LICENSE.md)
 
 Driver for [Metec Braille-line 20 Cell standard](http://web.metec-ag.de/downloads/braille-line-20cell.pdf) module for Arduino & Raspberry PI
