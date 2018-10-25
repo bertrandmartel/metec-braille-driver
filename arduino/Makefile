@@ -1,6 +1,6 @@
 # This makefile build the library only
 # generates libbraille.a static library
-OBJECTS=../src/braille.o ../src/pch.o
+OBJECTS=../src/braille.o
 HEADERS=-I../include
 
 PORT=/dev/ttyACM0

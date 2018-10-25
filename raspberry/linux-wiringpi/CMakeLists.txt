@@ -3,7 +3,7 @@ project(metecdriver LANGUAGES CXX VERSION 1.0)
 set(example_dir "out/examples")
 set (CMAKE_CXX_STANDARD 11)
 include(GNUInstallDirs)
-add_library(metecdriver SHARED ../../src/braille.cpp ../../src/pch.cpp)
+add_library(metecdriver SHARED ../../src/braille.cpp)
 set_target_properties(metecdriver PROPERTIES
     VERSION ${PROJECT_VERSION}
     SOVERSION 1

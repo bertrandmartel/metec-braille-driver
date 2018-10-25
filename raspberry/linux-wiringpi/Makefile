@@ -434,33 +434,6 @@ home/bmartel/open_source/braille-cell/src/braille.cpp.s:
 	$(MAKE) -f CMakeFiles/metecdriver.dir/build.make CMakeFiles/metecdriver.dir/home/bmartel/open_source/braille-cell/src/braille.cpp.s
 .PHONY : home/bmartel/open_source/braille-cell/src/braille.cpp.s
 
-home/bmartel/open_source/braille-cell/src/pch.o: home/bmartel/open_source/braille-cell/src/pch.cpp.o
-
-.PHONY : home/bmartel/open_source/braille-cell/src/pch.o
-
-# target to build an object file
-home/bmartel/open_source/braille-cell/src/pch.cpp.o:
-	$(MAKE) -f CMakeFiles/metecdriver.dir/build.make CMakeFiles/metecdriver.dir/home/bmartel/open_source/braille-cell/src/pch.cpp.o
-.PHONY : home/bmartel/open_source/braille-cell/src/pch.cpp.o
-
-home/bmartel/open_source/braille-cell/src/pch.i: home/bmartel/open_source/braille-cell/src/pch.cpp.i
-
-.PHONY : home/bmartel/open_source/braille-cell/src/pch.i
-
-# target to preprocess a source file
-home/bmartel/open_source/braille-cell/src/pch.cpp.i:
-	$(MAKE) -f CMakeFiles/metecdriver.dir/build.make CMakeFiles/metecdriver.dir/home/bmartel/open_source/braille-cell/src/pch.cpp.i
-.PHONY : home/bmartel/open_source/braille-cell/src/pch.cpp.i
-
-home/bmartel/open_source/braille-cell/src/pch.s: home/bmartel/open_source/braille-cell/src/pch.cpp.s
-
-.PHONY : home/bmartel/open_source/braille-cell/src/pch.s
-
-# target to generate assembly for a file
-home/bmartel/open_source/braille-cell/src/pch.cpp.s:
-	$(MAKE) -f CMakeFiles/metecdriver.dir/build.make CMakeFiles/metecdriver.dir/home/bmartel/open_source/braille-cell/src/pch.cpp.s
-.PHONY : home/bmartel/open_source/braille-cell/src/pch.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -501,9 +474,6 @@ help:
 	@echo "... home/bmartel/open_source/braille-cell/src/braille.o"
 	@echo "... home/bmartel/open_source/braille-cell/src/braille.i"
 	@echo "... home/bmartel/open_source/braille-cell/src/braille.s"
-	@echo "... home/bmartel/open_source/braille-cell/src/pch.o"
-	@echo "... home/bmartel/open_source/braille-cell/src/pch.i"
-	@echo "... home/bmartel/open_source/braille-cell/src/pch.s"
 .PHONY : help
 
 
