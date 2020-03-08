@@ -1,6 +1,7 @@
 raspberry/linux-wiringpi/out*
 raspberry/linux-wiringpi/CMakeFiles
 raspberry/linux-wiringpi/cmake_install.cmake
+raspberry/linux-wiringpi/Makefile
 CMakeCache.txt
 raspberry/linux-wiringpi/metadata/braille_driver.pc.in
 *.o
