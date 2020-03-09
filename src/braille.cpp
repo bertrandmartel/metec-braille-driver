@@ -33,6 +33,13 @@ uint8_t digitalRead(Windows::Devices::Gpio::GpioPin ^pin) {
 #endif //_WIN32
 
 void MetecDriver::writeAllCell() {
+    bool isBtnListening = btn_listen;
+    if(isBtnListening){
+        btn_listen = false;
+        while(btn_listening){
+            delay(0.2);
+        }
+    }
     digitalWrite(_strobe_pin, 0);
     for (uint8_t i = 0; i < _cellSize; i++) {
         digitalWrite(_clk_pin, 0); digitalWrite(_din_pin, bitRead(_cells[i], 6) ? 0 : 1); delay(0.25); digitalWrite(_clk_pin, 1); delay(0.25);
@@ -45,6 +52,9 @@ void MetecDriver::writeAllCell() {
         digitalWrite(_clk_pin, 0); digitalWrite(_din_pin, bitRead(_cells[i], 3) ? 0 : 1); delay(0.25); digitalWrite(_clk_pin, 1); delay(0.25);
     }
     digitalWrite(_strobe_pin, 1);
+    if (isBtnListening){
+        btn_listen = true;
+    }
 }
 
 void MetecDriver::setCellNoDelay(uint8_t position, uint8_t value) {
@@ -177,6 +187,10 @@ void MetecDriver::disableModule() {
 }
 
 void MetecDriver::checkButton() {
+    if (!btn_listen){
+        return;
+    }
+    btn_listening = true;
     //digitalWrite(_strobe_pin, 0);
     digitalWrite(_strobe_pin, 1);
     digitalWrite(_clk_pin, 1);
@@ -187,6 +201,11 @@ void MetecDriver::checkButton() {
     for (uint8_t i = _cellSize; i-- > 0;) {
         uint8_t val = 0;
         for (uint8_t j = 0; j < 2; j++) {
+            if (!btn_listen){
+                stopCheckingBtn();
+                btn_listening = false;
+                return;
+            }
             digitalWrite(_clk_pin, 0); value = digitalRead(_dout_pin); digitalWrite(_clk_pin, 1);
             val += (value << (4 * j));
         }
@@ -197,8 +216,7 @@ void MetecDriver::checkButton() {
         }
     }
 
-    digitalWrite(_clk_pin, 0);
-    digitalWrite(_strobe_pin, 0);
+    stopCheckingBtn();
 
     if (changed == 1) {
 #ifdef _WIN32
@@ -211,6 +229,12 @@ void MetecDriver::checkButton() {
         btn_update = true;
 #endif
     }
+    btn_listening = false;
+}
+
+void MetecDriver::stopCheckingBtn() {
+    digitalWrite(_clk_pin, 0);
+    digitalWrite(_strobe_pin, 0);
 }
 
 void MetecDriver::setWait(uint8_t wait) {

@@ -111,6 +111,8 @@ public:
     uint8_t btn_position;
     ButtonState btn_state;
     bool btn_update;
+    //true when listening to button / false otherwise
+    bool btn_listen = true;
     ~MetecDriver();
 #endif //_WIN32
 
@@ -121,6 +123,7 @@ private:
     void setCell(uint8_t position, uint8_t value);
     void setCellNoDelay(uint8_t position, uint8_t value);
     void writeAllCell();
+    void stopCheckingBtn();
 
     uint8_t _on_pin_val = 0;
     uint8_t _din_pin_val = 0;
@@ -128,6 +131,9 @@ private:
     uint8_t _clk_pin_val = 0;
     uint8_t _dout_pin_val = 0;
     uint8_t _wait = DEFAULT_TIME_BETWEEN_CELL;
+
+    //set when starting checkButton
+    bool btn_listening = false;
 
 #ifdef _WIN32
     Windows::Devices::Gpio::GpioPin ^_on_pin;
