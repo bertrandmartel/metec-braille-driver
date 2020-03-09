@@ -177,10 +177,10 @@ void MetecDriver::disableModule() {
 }
 
 void MetecDriver::checkButton() {
-    digitalWrite(_strobe_pin, 0);
+    //digitalWrite(_strobe_pin, 0);
     digitalWrite(_strobe_pin, 1);
     digitalWrite(_clk_pin, 1);
-    delay(10);
+    //delay(10);
     uint8_t changed = 0;
     uint8_t value;
     uint8_t position = 0;
