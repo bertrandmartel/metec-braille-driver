@@ -107,6 +107,11 @@ public:
         bool get() { return _btn_update; }
         void set(bool value) { _btn_update = value; }
     }
+    property bool btn_listen
+    {
+        bool get() { return _btn_listen; }
+        void set(bool value) { _btn_listen = value; }
+    }
 #else
     uint8_t btn_position;
     ButtonState btn_state;
@@ -157,6 +162,7 @@ private:
     uint8_t _btn_position = 0;
     ButtonState _btn_state = ButtonState::Released;
     bool _btn_update;
+    bool _btn_listen;
 #endif
 };
 
