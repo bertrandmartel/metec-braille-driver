@@ -33,19 +33,18 @@ uint8_t digitalRead(Windows::Devices::Gpio::GpioPin ^pin) {
 #endif //_WIN32
 
 void MetecDriver::writeAllCell() {
+    digitalWrite(_strobe_pin, 0);
     for (uint8_t i = 0; i < _cellSize; i++) {
-        digitalWrite(_din_pin, bitRead(_cells[i], 6) ? 0 : 1); digitalWrite(_clk_pin, 1); digitalWrite(_clk_pin, 0);
-        digitalWrite(_din_pin, bitRead(_cells[i], 7) ? 0 : 1); digitalWrite(_clk_pin, 1); digitalWrite(_clk_pin, 0);
-        digitalWrite(_din_pin, bitRead(_cells[i], 2) ? 0 : 1); digitalWrite(_clk_pin, 1); digitalWrite(_clk_pin, 0);
-        digitalWrite(_din_pin, bitRead(_cells[i], 1) ? 0 : 1); digitalWrite(_clk_pin, 1); digitalWrite(_clk_pin, 0);
-        digitalWrite(_din_pin, bitRead(_cells[i], 0) ? 0 : 1); digitalWrite(_clk_pin, 1); digitalWrite(_clk_pin, 0);
-        digitalWrite(_din_pin, bitRead(_cells[i], 5) ? 0 : 1); digitalWrite(_clk_pin, 1); digitalWrite(_clk_pin, 0);
-        digitalWrite(_din_pin, bitRead(_cells[i], 4) ? 0 : 1); digitalWrite(_clk_pin, 1); digitalWrite(_clk_pin, 0);
-        digitalWrite(_din_pin, bitRead(_cells[i], 3) ? 0 : 1); digitalWrite(_clk_pin, 1); digitalWrite(_clk_pin, 0);
+        digitalWrite(_clk_pin, 0); digitalWrite(_din_pin, bitRead(_cells[i], 6) ? 0 : 1); delay(0.25); digitalWrite(_clk_pin, 1); delay(0.25);
+        digitalWrite(_clk_pin, 0); digitalWrite(_din_pin, bitRead(_cells[i], 7) ? 0 : 1); delay(0.25); digitalWrite(_clk_pin, 1); delay(0.25);
+        digitalWrite(_clk_pin, 0); digitalWrite(_din_pin, bitRead(_cells[i], 2) ? 0 : 1); delay(0.25); digitalWrite(_clk_pin, 1); delay(0.25);
+        digitalWrite(_clk_pin, 0); digitalWrite(_din_pin, bitRead(_cells[i], 1) ? 0 : 1); delay(0.25); digitalWrite(_clk_pin, 1); delay(0.25);
+        digitalWrite(_clk_pin, 0); digitalWrite(_din_pin, bitRead(_cells[i], 0) ? 0 : 1); delay(0.25); digitalWrite(_clk_pin, 1); delay(0.25);
+        digitalWrite(_clk_pin, 0); digitalWrite(_din_pin, bitRead(_cells[i], 5) ? 0 : 1); delay(0.25); digitalWrite(_clk_pin, 1); delay(0.25);
+        digitalWrite(_clk_pin, 0); digitalWrite(_din_pin, bitRead(_cells[i], 4) ? 0 : 1); delay(0.25); digitalWrite(_clk_pin, 1); delay(0.25);
+        digitalWrite(_clk_pin, 0); digitalWrite(_din_pin, bitRead(_cells[i], 3) ? 0 : 1); delay(0.25); digitalWrite(_clk_pin, 1); delay(0.25);
     }
     digitalWrite(_strobe_pin, 1);
-    digitalWrite(_strobe_pin, 0);
-    digitalWrite(_din_pin, 0);
 }
 
 void MetecDriver::setCellNoDelay(uint8_t position, uint8_t value) {
@@ -68,8 +67,8 @@ void MetecDriver::full() {
 
 void MetecDriver::setCell(uint8_t position, uint8_t value) {
     _cells[position] = value;
+    writeAllCell();
     if (_wait != 0) {
-        writeAllCell();
         delay(_wait);
     }
 }
