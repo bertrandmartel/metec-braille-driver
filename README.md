@@ -90,7 +90,7 @@ git submodule update --init --recursive
 
 ## 8 Pin Adapter 
 
-The 8 pin adapter 2.00mm to 2.54mm was created on [KiCad EDA](http://kicad-pcb.org/), files are available under `8pin-adapter` :
+The 8 pin adapter 2.00mm to 2.54mm was created on [KiCad EDA](http://kicad.org/), files are available under `8pin-adapter` :
 
 ![8 Pin Adapter](https://user-images.githubusercontent.com/5183022/47248426-a5ba1f80-d40a-11e8-8a8c-5aa408a3e197.png)
 
